@@ -33,7 +33,7 @@ to the proper location of RPC.py
 6. Find Vinegar in the application menu then right click it and click "Settings"
 <img width="743" height="98" alt="image" src="https://github.com/user-attachments/assets/9f7daf10-baaf-44c7-ab45-3fcce6cce6aa" />
 
-7. Once you are in the settings of vinegar, toggle on "Web Pages"
+7. Once you are in the settings of vinegar, toggle on "Web Pages", this is so if you have issues with the OAuth login method you can use Quick-Sign in/similar in Studio.
 <img width="451" height="112" alt="image" src="https://github.com/user-attachments/assets/fa806da0-f84f-4925-a04a-ad57bc03dede" />
 
 ## How to uninstall once fully installed?
