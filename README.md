@@ -7,10 +7,10 @@ Since the Rich presence of Vinegar does not work for me, i have made this workar
 If Vinegar fully fixes their RPC and has all the statues in this, then this repo will be archived.
 
 ## How to install?
-1. In KDE Plasma, right click on the menu button in taskbar and click "Edit Applications" then search for Vinegar, or you may right click on Vinegar in application menu and click "Edit Application":
+1. In KDE Plasma, right click on the menu button in taskbar and click "Edit Applications" then search for Vinegar, you may also right click on Vinegar in application menu and click "Edit Application":
 <img width="1008" height="419" alt="image" src="https://github.com/user-attachments/assets/556e6945-cbd2-4068-a0cb-8753aa4983bc" />
 
-2. Download [launch_studio.sh](https://github.com/adudu21isme/vinegar-rpc-for-kde-plasma/blob/main/src/launch_studio.sh)
+2. Download [launch_studio.sh](https://github.com/adudu21isme/vinegar-rpc-for-kde-plasma/blob/main/src/launch_studio.sh) and ideally save it to your `~/Documents` folder
 3. Open launch studio.sh in a program that permits you to edft .sh files like Kate, then replace:
 ```bash
 /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=vinegar --file-forwarding org.vinegarhq.Vinegar @@u "$@" @@
@@ -24,5 +24,16 @@ with the Command-Line arguments that are visible in KDE Menu Editor (click in th
 And change Program to the location of the launch_studio.sh script
 <img width="1334" height="429" alt="image" src="https://github.com/user-attachments/assets/929a74ec-1392-42ca-a08b-eae023c4e2cc" />, which you can find via Dolphin:
 <img width="864" height="665" alt="image" src="https://github.com/user-attachments/assets/de07aee1-3027-45e0-a65c-1cb669c762a1" />
+
+5. Download [RPC.py](https://github.com/adudu21isme/vinegar-rpc-for-kde-plasma/blob/main/src/RPC.py) and save it to your `~/Documents` folder, if it is not in your documents folder then you will have to edit this in launch.studio.sh:
+```bash
+"$HOME/Documents/RPC.py"
+```
+to the proper location of RPC.py
+6. Find Vinegar in the application menu then right click it and click "Settings"
+<img width="743" height="98" alt="image" src="https://github.com/user-attachments/assets/9f7daf10-baaf-44c7-ab45-3fcce6cce6aa" />
+
+7. Once you are in the settings of vinegar, toggle on "Web Pages"
+<img width="451" height="112" alt="image" src="https://github.com/user-attachments/assets/fa806da0-f84f-4925-a04a-ad57bc03dede" />
 
 ## How to uninstall once fully installed?
