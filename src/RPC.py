@@ -97,7 +97,7 @@ def parse_flog_tag(line: str) -> tuple[Optional[str], str]:
 
 # Stuff to listen for
 RE_OPEN_PLACE_ID = re.compile(r"open place \(identifier = (\d+)\)")
-RE_LOCAL_FILE_OPEN = re.compile(r"open place \(identifier = Z:(.+?\.rbxlx?)\)") #TODO
+RE_LOCAL_FILE_OPEN = re.compile(r"open place \(identifier = [A-Za-z]:(.+?\.rbxlx?)\)") # any drive letter supported
 RE_PLACE_NAME = re.compile(r'(?:Saved|Published) new changes in "(.+?)" to Roblox\.')
 
 # better log
@@ -345,28 +345,46 @@ def handle_line(line: str, state: PresenceState) -> bool:
     changed = False
     channel, message = parse_flog_tag(line)
 
-    match = RE_LOCAL_FILE_OPEN.search(line)
-    if match:
-        changed |= open_local_place(state, os.path.basename(match.group(1)))
+    # Command bar echoes ("> <code>")
+    # every output channel check below has to skip both.
+    output_is_command_bar_result = False
+    if channel == "Output":
+        if message.startswith("> "):
+            state._suppress_next_output = True
+            output_is_command_bar_result = True
+        elif state._suppress_next_output:
+            state._suppress_next_output = False
+            output_is_command_bar_result = True
 
-    match = RE_OPEN_PLACE_ID.search(line)
-    if match:
-        changed |= open_place(state, match.group(1))
+    # "open place" only ever appears with FLog::StudioKeyEvents prefix in real logs.
+    if channel == "StudioKeyEvents":
+        match = RE_LOCAL_FILE_OPEN.search(message)
+        if match:
+            changed |= open_local_place(state, os.path.basename(match.group(1)))
 
-    # These are shown in real logs of windows client studio version 0.727.0.7271204
+        match = RE_OPEN_PLACE_ID.search(message)
+        if match:
+            changed |= open_place(state, match.group(1))
+
+    # in real logs of windows client studio version 0.727.0.7271204
     if channel == "telemetryLog" and message == "State: PlaceClosed":
         changed |= close_place(state)
 
-    match = RE_PLACE_NAME.search(line)
-    if match and match.group(1) != state.place_name:
-        state.place_name = match.group(1)
-        changed = True
+    # actual "Saved/Published new changes" logs do show in regular output, same as
+    # print(). this blocks faking it from the command bar.
+    if channel == "Output" and not output_is_command_bar_result:
+        match = RE_PLACE_NAME.search(message)
+        if match and match.group(1) != state.place_name:
+            state.place_name = match.group(1)
+            changed = True
 
     if state.mode == "idle":
         return changed
 
-    # "Action X is not handled" only counts from FLog::Error. print()/warn() output
-    # always lands in FLog::Output, so faking this exact text can't be mistaken for it.
+    # "Action X is not handled" only counts from FLog::Error. print()/warn() always
+    # land in Output; error() can land in Error too, but gets a "CommandBar:N:" (or
+    # script path) prefix that breaks the ^Action...$ anchor below. keep this as
+    # .match(), not .search().
     action = None
     if channel == "Error":
         action_match = RE_ACTION_NOT_HANDLED.match(message)
@@ -395,13 +413,7 @@ def handle_line(line: str, state: PresenceState) -> bool:
 
         # if user is in a valid state, editing script will show correctly/similar
     elif state.mode not in ("play", "playhere", "placeinit", "run", "teamtest", "serverandclient"):
-        if channel == "Output" and message.startswith("> "):
-            # Command bar echo, the next Output line is user print output, not engine.
-            state._suppress_next_output = True
-        elif channel == "Output" and state._suppress_next_output:
-            # user print result so discard and reset.
-            state._suppress_next_output = False
-        elif channel == "Output" and message == "Info: RobloxScriptDoc::activate - start":
+        if channel == "Output" and not output_is_command_bar_result and message == "Info: RobloxScriptDoc::activate - start":
             queue_doc_mode(state, "scripting")
         # FLog::RobloxIDEDoc is not reachable by print.
         elif channel == "RobloxIDEDoc" and message == "RobloxIDEDoc::activate - start":
