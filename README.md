@@ -33,7 +33,7 @@ and set **Program** to the location of `launch_studio.sh`.
 > ```bash
 > "$HOME/Documents/RPC.py"
 > ```
-> Replace it with the full path to `RPC.py`, similar to how you found the **Program** path for `launch_studio.sh`.
+> with the full path to `RPC.py`, similar to how you found the **Program** path for `launch_studio.sh`.
 6. Find **Vinegar** in the application menu, right-click it, and select **Settings**.
 <img width="743" height="98" alt="image" src="https://github.com/user-attachments/assets/9f7daf10-baaf-44c7-ab45-3fcce6cce6aa" />
 
