@@ -59,9 +59,9 @@ you would copy
 ```
 run --branch=stable --arch=x86_64 --command=vinegar --file-forwarding org.vinegarhq.Vinegar @@u "$@" @@
 ```
-2. Open KDE menu editor, find Vinegar and replace its Command-Line args with the correct copied args
+2. Open KDE menu editor (which is shown how to do in [How to Install](#how-to-install), find Vinegar and replace its Command-Line args with the correct copied args
 3. Replace "Program" with
 ```
 /usr/bin/flatpak
 ```
-4.
+4. Delete `launch_studio.sh` and delete `RPC.py`
