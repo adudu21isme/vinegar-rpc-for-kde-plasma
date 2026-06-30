@@ -12,12 +12,7 @@ If Vinegar fixes its rich presence feature and supports all of the statuses prov
 > <img width="1008" height="419" alt="image" src="https://github.com/user-attachments/assets/556e6945-cbd2-4068-a0cb-8753aa4983bc" />
 
 > [!WARNING]
-> You must install the required packages, otherwise the script will not work.
->
-> Run this command in your terminal to install them:
-> ```bash
-> pip install psutil pypresence
-> ```
+> You must install the [required packages](requirements.txt), otherwise the script will not work.
 
 2. Download [launch_studio.sh](src/launch_studio.sh) and save it somewhere convenient (this guide assumes `~/Documents`).
 3. Open `launch_studio.sh` in a text editor such as Kate, then replace the following line:
