@@ -18,7 +18,7 @@ If Vinegar fixes its rich presence feature and supports all of the statuses prov
 > ```
 > sudo pacman -S python-pypresence python-psutil
 > ```
-> which works for me (i use CachyOS)
+> which works for me (i use [CachyOS](https://cachyos.org/))
 
 2. Download [launch_studio.sh](src/launch_studio.sh) and save it somewhere convenient (this guide assumes `~/Documents`).
 3. Open `launch_studio.sh` in a text editor such as Kate, then replace the following line:
