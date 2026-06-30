@@ -25,7 +25,7 @@ If Vinegar fixes its rich presence feature and supports all of the statuses prov
 ```bash
 run --branch=stable --arch=x86_64 --command=vinegar --file-forwarding org.vinegarhq.Vinegar @@u "$@" @@
 ```
-with with the contents of the **Command-line arguments** field in **KDE Menu Editor**. Click inside the field, press Ctrl+A, then Ctrl+C, and paste the copied text over the command above.
+with the contents of the **Command-line arguments** field in **KDE Menu Editor**. Click inside the field, press Ctrl+A, then Ctrl+C, and paste the copied text over the command above.
 <img width="1330" height="419" alt="image" src="https://github.com/user-attachments/assets/06e21b29-0155-4e89-8033-dbee5354d52c" />
 4. After editing `launch_studio.sh`, set **Command-line arguments** to:
 ```
