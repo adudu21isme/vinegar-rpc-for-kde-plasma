@@ -48,5 +48,20 @@ And change Program to the location of the `launch_studio.sh` script
 
 > [!NOTE]
 > This is so if you have issues with the OAuth login method you can use Quick-Sign in/similar for Studio.
+8. Close settings and launch studio, it should ideally work if the python script is running successfully!
 
 ## How to uninstall once fully installed?
+1. Open your `launch studio.sh` and copy the Command-Line arguments which is after `/usr/bin/flatpak`, for reference in:
+```
+exec /usr/bin/flatpak run --branch=stable --arch=x86_64 --command=vinegar --file-forwarding org.vinegarhq.Vinegar @@u "$@" @@
+```
+you would copy
+```
+run --branch=stable --arch=x86_64 --command=vinegar --file-forwarding org.vinegarhq.Vinegar @@u "$@" @@
+```
+2. Open KDE menu editor, find Vinegar and replace its Command-Line args with the correct copied args
+3. Replace "Program" with
+```
+/usr/bin/flatpak
+```
+4.
