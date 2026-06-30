@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # Require
 import urllib.request
@@ -53,7 +53,7 @@ PLACE_NAME_CACHE_MAX = 100
 # Fetch lock path
 LOCK_PATH = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "vinegar_rpc.lock")
 
-# if "python3 RPC.py --internal" then it will use internal app
+# if "python RPC.py --internal" then it will use internal app
 def _parse_args() -> "argparse.Namespace":
     p = argparse.ArgumentParser()
     p.add_argument("--internal", action="store_true")
